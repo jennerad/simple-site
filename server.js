@@ -6,10 +6,14 @@ var randomString = '';
 var jokes = [
 {setup: 'Why don\'t lions play cards in the jungle?',
 punchline: 'Too many cheetahs.'},
-{setup: 'What do you call a masseuse who hates women?',
-punchline: 'A (massage)ynist!'},
+{setup: 'Why did the yogurt go to the art exhibit?',
+punchline: 'To get more cultured.'},
 {setup: 'What did the 0 say to the 8?',
-punchline: 'Nice belt.'}
+punchline: 'Nice belt.'},
+{setup: 'What did one math book say to the other?',
+punchline: 'I got problems.'},
+{setup: 'How does the moon cut his hair?',
+punchline: 'Eclipse it.'}
 ];
 var photos = [
 {alt: 'grey toned photo of birds',
@@ -28,9 +32,6 @@ app.use(express.static(__dirname + '/app/'));
 app.get('/', function(req, res){ //endpoint #1
   res.sendFile('index.html');
 });
-
-//add the photo on page load
-
 
 //serve random photo when it's clicked on
 app.get('/photos', function(req, res) {

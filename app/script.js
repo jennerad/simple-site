@@ -13,15 +13,11 @@ $(document).ready(function() {
     return randomString;
   }
 
-
-
   $('#myButton').on('click', function(){
     randomStringFromArray(alphabet);
     $('#answer').append('<li>' + randomString + '</li>');
   });
-  // $('#jokes').on('click', function(){
-  //   $('#ajax-text').append('Hello world');
-  // });
+
   $('#photos').on('click', function() {
     var url = $(this).attr('id');
     var photosHTML;
@@ -36,11 +32,11 @@ $(document).ready(function() {
     $.get(url, function (response) {
     var resText;
       if(typeof response === 'object'){
-        resText = response.setup + ': ' + response.punchline;
+        resText = response.setup + '</p><p><em>' + response.punchline + '</em></p>';
       } else {
         resText = response;
       }
-      $('#ajax-text').text(resText);
+      $('#ajax-text').html(resText);
     });
   });
 
