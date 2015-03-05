@@ -1,13 +1,25 @@
 body {
   text-align: center;
+  font-family: helvetica, verdana, sans-serif;
+    line-height: 1.3em;
+      font-size: 1.2em;
+  text-align: center;
 }
 
-li {
-  font-size: 2em;
-  text-align: left;
-  margin-left: 40%;
+li { 
+  list-style-type: none;
 }
 
-main {
+button {
+  padding: .5em;
+  margin: 1em;
+}
+
+.main {
   margin-top: 3%;
+}
+
+img {
+  height: 200px;
+  margin: 20px;
 }
