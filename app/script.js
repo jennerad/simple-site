@@ -13,9 +13,9 @@ $(document).ready(function() {
     return randomString;
   }
 
-  $('#myButton').on('click', function(){
+  $('#random').on('click', function(){
     randomStringFromArray(alphabet);
-    $('#answer').append('<li>' + randomString + '</li>');
+    $('#randomString').html('<p>' + randomString + '</p>');
   });
 
   $('#photos').on('click', function() {
@@ -32,7 +32,7 @@ $(document).ready(function() {
     $.get(url, function (response) {
     var resText;
       if(typeof response === 'object'){
-        resText = response.setup + '</p><p><em>' + response.punchline + '</em></p>';
+        resText = '<p>' + response.setup + '</p><p><em>' + response.punchline + '</em></p>';
       } else {
         resText = response;
       }

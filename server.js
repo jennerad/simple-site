@@ -13,7 +13,9 @@ punchline: 'Nice belt.'},
 {setup: 'What did one math book say to the other?',
 punchline: 'I got problems.'},
 {setup: 'How does the moon cut his hair?',
-punchline: 'Eclipse it.'}
+punchline: 'Eclipse it.'},
+{setup: 'Why shouldn\'t you write with a broken pencil?',
+punchline: 'It\'s pointless.'}
 ];
 var photos = [
 {alt: 'grey toned photo of birds',

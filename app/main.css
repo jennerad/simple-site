@@ -10,9 +10,13 @@ li {
   list-style-type: none;
 }
 
+p {
+}
 button {
-  padding: .5em;
+  padding: 1em;
   margin: 1em;
+  border-radius: 3px;
+  background-color: #eee;
 }
 
 .main {
