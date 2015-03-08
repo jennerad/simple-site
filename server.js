@@ -60,6 +60,26 @@ app.get('/random-strings', function(req, res){ //endpoint #3
       return randomString;
 });
 
+//create a random string selected from 3 arrays
+    var array1 = ['episodic', 'hairy', 'funky', 'bloated', 'rockstar', 'super sonic', 'deadly', 'amplified', 'cartoon', 'overflowing', 'caffeinated'];
+    var array2 = ['elephant', 'elevator', 'haircut', 'corner store', 'surfer', 'skater', 'infinity', 'battleground', 'data', 'alphabet', 'elbow', 'karate'];
+    var array3 = ['poodles', 'spider monkeys', 'anteaters', 'truths', 'haters', 'banana splits', 'jokers', 'trombones', 'rainbows', 'poppers'];
+
+app.get('/band-names', function(req, res) {
+      var randomArray1 = Math.floor(Math.random() * array1.length);
+      var randomArray2 = Math.floor(Math.random() * array2.length);
+      var randomArray3 = Math.floor(Math.random() * array3.length);
+      var band1 = array1[randomArray1];
+      var band2 = array2[randomArray2];
+      var band3 = array3[randomArray3];
+      var randomBandName = band1 + ' ' + band2 + ' ' + band3;
+    res.send(randomBandName);
+    return randomBandName;
+    // console.log(randomBandName);
+    // return randomBandName;
+  });
+
+
 app.listen(port, function(){
   console.log('Server has been started on ' + port);
 });
