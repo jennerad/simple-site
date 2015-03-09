@@ -57,7 +57,7 @@ $(document).ready(function() {
   //   $("#band-name").html("<p>" + randomBandName + "</p>");
   // });
 
-    $("#band-names").on("click", function(){
+    $("#bandName").on("click", function(){
       var url = $(this).attr("id");
       var randomBandNameHTML;
       $.get(url, function (response) { 
