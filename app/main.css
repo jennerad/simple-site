@@ -1,8 +1,8 @@
 body {
   text-align: center;
   font-family: helvetica, verdana, sans-serif;
-    line-height: 1.3em;
-      font-size: 1.2em;
+  line-height: 1.3em;
+  font-size: 1.2em;
   text-align: center;
 }
 
@@ -12,15 +12,16 @@ li {
 
 p {
 }
-button {
+
+button, input {
   padding: 1em;
   margin: 1em;
   border-radius: 3px;
   background-color: #eee;
 }
 
-.main {
-  margin-top: 3%;
+#piglatinified {
+  font-style: italic;
 }
 
 img {

@@ -2,6 +2,7 @@ $(document).ready(function() {
   var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u" , "v", "w", "x","y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   var randomString = "";
   
+
   function randomStringFromArray(array) {
     var tempArray = [];
     var randomNum = Math.floor((Math.random() * 25) + 1);
@@ -66,4 +67,17 @@ $(document).ready(function() {
       });
     });
 
+    $("#piglatin").on("submit", function(e) {
+      e.preventDefault(); //don't refresh the whole page
+      var firstname = $('input[name=firstname]').val(); //get the value of what was in the input tag firstname and put it into the variable
+      var lastname = $('input[name=lastname]').val();
+      var name = {firstname: firstname, lastname: lastname}; //constructing an object, key firstname, value firstname, etc.
+  // console.log(name.firstname);
+  // console.log(name.lastname);
+      $.post("piglatin", name, function(response) { //send data to the server, piglatin is the route name (it'll be blahblah/piglatin. parameters are in the order of (route, data/variable, function)
+        var piglatinified = response.firstname + " " + response.lastname;
+  // console.log(piglatinified);
+        $("#piglatinified").text(piglatinified);
+      });
+    });
 });

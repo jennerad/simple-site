@@ -1,8 +1,17 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
+var piglatinify = require("./lib/piglatinify.js"); 
+var bodyparser = require('body-parser');
+app.use(bodyparser.json()); //hey app, we want you touse the json parts of body-parser
+app.use(bodyparser.urlencoded({extended: true})); //need this to see the data coming in
+
+// use /app as home folder
+app.use(express.static(__dirname + '/app/'));
+
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x','y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '@', '#', '$', '%', '^', '&'];
 var randomString = '';
+
 var jokes = [
 {setup: 'Why don\'t lions play cards in the jungle?',
 punchline: 'Too many cheetahs.'},
@@ -17,6 +26,7 @@ punchline: 'Eclipse it.'},
 {setup: 'Why shouldn\'t you write with a broken pencil?',
 punchline: 'It\'s pointless.'}
 ];
+
 var photos = [
 {alt: 'grey toned photo of birds',
   src: 'images/pigeonmurmuration1.png'},
@@ -27,8 +37,6 @@ src: 'images/pigeonmurmuration3.png'},
 {alt: 'red toned photo of birds',
 src: 'images/pigeonmurmuration4.png'}
 ];
-// use /app as home folder
-app.use(express.static(__dirname + '/app/'));
 
 //make index.html home page
 app.get('/', function(req, res){ //endpoint #1
@@ -78,6 +86,16 @@ app.get('/bandName', function(req, res) {
     // console.log(randomBandName);
   });
 
+app.post("/piglatin", function(req, res) { //this is the postroute form!
+  var firstname = piglatinify(req.body.firstname); //body is what got sent from front end, as opposed to the head
+  var lastname = piglatinify(req.body.lastname); //we're calling a function named piglatinify, 
+  var piglatined = {firstname: firstname, lastname: lastname}; //new variable to hold results of this object
+  res.json(piglatined);//handles the encoding of this, makes it a string with quotes around it.
+});
+
+// function piglatinify(word) {
+ //this has been moved to piglatinify.js
+// };
 
 app.listen(port, function(){
   console.log('Server has been started on ' + port);
