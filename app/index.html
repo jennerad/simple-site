@@ -11,23 +11,32 @@
           <input type="submit" value="Piglatinify It" />
         </form>
         <p>Your name in Pig Latin:</p>
-        <p id="piglatinified">...</p>
+        <p id="piglatinified" class="output"></p>
       </section>
-    </br>
+    </br><hr></br>
       <section id="photos">
         <img src="images/pigeonmurmuration1.png" >
       </section>
-    </br>
+    </br><hr></br>
         <button id="jokes">Need a joke? Get a random selection from the Dinner Party Download's <a href="http://www.dinnerpartydownload.org/category/icebreaker-2" target="_blank">Icebreakers</a>.</button>
-        <p id="ajax-text"></p>
-    </br>
+        <p id="ajax-text" class="output"></p>
+    </br><hr></br>
       <button id="random">Quick!! I need a random string!</button>
-        <p id="randomString"></p>
-    </br>  
+        <p id="randomString" class="output"></p>
+    </br><hr></br>
       <button id="bandName">Hit me up for a name for your band, kickball team, etc...</button>
-        <p id="bandString">
-        </p>
-
+        <p id="bandString" class="output"></p>
+    </br><hr></br>
+     <section id="bandNameCustomized">
+        <p>Or, for a <em>personalized</em> band name...</p>
+        <form id="bandNameCustom">
+          <label>Enter your spirit animal (please make it a plural):</label><input type="text" name="animal" required></br>
+          <input type="submit" value="Make it into a band name"/>
+        </form>
+        <p>Your customized band name:</p>
+        <p id="bandStringCustom" class="output"></p>
+      </section>
+    </br><hr></br>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="script.js"></script>

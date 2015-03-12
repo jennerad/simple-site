@@ -20,8 +20,9 @@ button, input {
   background-color: #eee;
 }
 
-#piglatinified {
-  font-style: italic;
+.output{
+color: #3498ee;
+font-size: 1.5em;
 }
 
 img {

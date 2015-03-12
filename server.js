@@ -7,9 +7,10 @@ var jokify = require("./lib/jokify.js");
 var photify = require("./lib/photify.js");
 var randomify = require("./lib/randomify.js");
 var bandify = require("./lib/bandify.js");
+var bandcustomify = require("./lib/bandcustomify.js");
 
 var bodyparser = require("body-parser");
-app.use(bodyparser.json()); //hey app, we want you touse the json parts of body-parser
+app.use(bodyparser.json()); //hey app, we want you to use the json parts of body-parser
 app.use(bodyparser.urlencoded({ extended: true })); //need this to see the data coming in
 
 // use /app as home folder
@@ -41,6 +42,12 @@ app.get("/random", function(req, res) { //endpoint #3
 app.get("/bandName", function(req, res) {
   var theBandName = bandify();
   res.json(theBandName);
+  });
+
+app.post("/bandNameCustom", function(req, res) {
+  var animaled = bandcustomify(req.body.animal);
+  // console.log("animaled in the app post is " + animaled); //returns undefined
+  res.json(animaled);
   });
 
 app.post("/piglatin", function(req, res) { //this is the postroute form!
