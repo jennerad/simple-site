@@ -1,8 +1,8 @@
 body {
   text-align: center;
   font-family: helvetica, verdana, sans-serif;
-    line-height: 1.3em;
-      font-size: 1.2em;
+  line-height: 1.3em;
+  font-size: 1.2em;
   text-align: center;
 }
 
@@ -10,13 +10,19 @@ li {
   list-style-type: none;
 }
 
-button {
-  padding: .5em;
-  margin: 1em;
+p {
 }
 
-.main {
-  margin-top: 3%;
+button, input {
+  padding: 1em;
+  margin: 1em;
+  border-radius: 3px;
+  background-color: #eee;
+}
+
+.output{
+color: #3498ee;
+font-size: 1.5em;
 }
 
 img {

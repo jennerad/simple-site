@@ -1,62 +1,62 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 var port = process.env.PORT || 3000;
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x','y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '@', '#', '$', '%', '^', '&'];
-var randomString = '';
-var jokes = [
-{setup: 'Why don\'t lions play cards in the jungle?',
-punchline: 'Too many cheetahs.'},
-{setup: 'What do you call a masseuse who hates women?',
-punchline: 'A (massage)ynist!'},
-{setup: 'What did the 0 say to the 8?',
-punchline: 'Nice belt.'}
-];
-var photos = [
-{alt: 'grey toned photo of birds',
-  src: 'images/pigeonmurmuration1.png'},
-{alt: 'blue toned photo of birds',
-  src: 'images/pigeonmurmuration2.png'},
-{alt: 'yellow toned photo of birds',
-src: 'images/pigeonmurmuration3.png'},
-{alt: 'red toned photo of birds',
-src: 'images/pigeonmurmuration4.png'}
-];
+
+var piglatinify = require("./lib/piglatinify.js");
+var jokify = require("./lib/jokify.js");
+var photify = require("./lib/photify.js");
+var randomify = require("./lib/randomify.js");
+var bandify = require("./lib/bandify.js");
+var bandcustomify = require("./lib/bandcustomify.js");
+
+var bodyparser = require("body-parser");
+app.use(bodyparser.json()); //hey app, we want you to use the json parts of body-parser
+app.use(bodyparser.urlencoded({ extended: true })); //need this to see the data coming in
+
 // use /app as home folder
-app.use(express.static(__dirname + '/app/'));
+app.use(express.static(__dirname + "/app/"));
 
 //make index.html home page
-app.get('/', function(req, res){ //endpoint #1
-  res.sendFile('index.html');
+app.get("/", function(req, res) { //endpoint #1
+  res.sendFile("index.html");
 });
 
-//add the photo on page load
-
-
-//serve random photo when it's clicked on
-app.get('/photos', function(req, res) {
-  var randomIndex = Math.floor(Math.random() * photos.length);
-  res.json(photos[randomIndex]);
+//serve random photo when it"s clicked on
+app.get("/photos", function(req, res) {
+  var thePhoto = photify();
+  res.json(thePhoto);
 });
 
 // serve random joke from json object
-app.get('/jokes', function(req, res){ //endpoint #2
-  var randomIndex = Math.floor(Math.random() * jokes.length);
-  res.json(jokes[randomIndex]);
+app.get("/jokes", function(req, res) { //endpoint #2
+  var theJoke = jokify();
+  res.json(theJoke);
 });
 
 // use string generator at /random-strings page
-app.get('/random-strings', function(req, res){ //endpoint #3
-  var tempArray = [];
-      var randomNum = Math.floor((Math.random() * 25) + 1);
-      for (var i = 0; i < randomNum; i++) {
-        var randomNumber = Math.floor(Math.random() * alphabet.length);
-        tempArray[i] = alphabet[randomNumber];
-      }
-      randomString = tempArray.join('');
-      res.send(randomString);
-      return randomString;
+app.get("/random", function(req, res) { //endpoint #3
+  var theRandomString = randomify();
+  res.send(theRandomString);
 });
 
-app.listen(port, function(){
-  console.log('Server has been started on ' + port);
+app.get("/bandName", function(req, res) {
+  var theBandName = bandify();
+  res.json(theBandName);
+  });
+
+app.post("/bandNameCustom", function(req, res) {
+  animalPost = req.body.animal;
+  var animaled = bandcustomify(req.body.animal);
+  res.json(animaled);
+  });
+
+app.post("/piglatin", function(req, res) { //this is the postroute form!
+  var firstname = piglatinify(req.body.firstname); //body is what got sent from front end, as opposed to the head
+  var lastname = piglatinify(req.body.lastname); //we"re calling a function named piglatinify,
+  var piglatined = { firstname: firstname, lastname: lastname }; //new variable to hold results of this object
+  res.json(piglatined);//handles the encoding of this, makes it a string with quotes around it.
+});
+
+app.listen(port, function() {
+  console.log("Server has been started on " + port);
 });

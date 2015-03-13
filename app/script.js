@@ -1,47 +1,65 @@
 $(document).ready(function() {
-  var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x','y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  var randomString = '';
-  
-  function randomStringFromArray(array) {
-    var tempArray = [];
-    var randomNum = Math.floor((Math.random() * 25) + 1);
-    for (var i = 0; i < randomNum; i++) {
-      var randomNumber = Math.floor(Math.random() * array.length);
-      tempArray[i] = array[randomNumber];
-    }
-    randomString = tempArray.join('');
-    return randomString;
-  }
 
-
-
-  $('#myButton').on('click', function(){
-    randomStringFromArray(alphabet);
-    $('#answer').append('<li>' + randomString + '</li>');
-  });
-  // $('#jokes').on('click', function(){
-  //   $('#ajax-text').append('Hello world');
-  // });
-  $('#photos').on('click', function() {
-    var url = $(this).attr('id');
-    var photosHTML;
-    $.get(url, function (response) {
-      photosHTML = '<img src=\"' + response.src + '\" alt=\"' + response.alt + '\" >';
-    $('#photos').html(photosHTML);
+  $("#random").on("click", function() {
+    var url = $(this).attr("id");
+    var randomStringHTML;
+    $.get(url, function(response) {
+    randomStringHTML = "<p>" + response + "</p>";
+    // randomStringFromArray(alphabet);
+    $("#randomString").html(randomStringHTML);
     });
-   }); 
+  });
 
-  $('#jokes').on('click', function() {
-    var url = $(this).attr('id');
-    $.get(url, function (response) {
+  $("#photos").on("click", function() {
+    var url = $(this).attr("id");
+    var photosHTML;
+    $.get(url, function(response) {
+      photosHTML = "<img src=\"" + response.src + "\" alt=\"" + response.alt + "\" >";
+    $("#photos").html(photosHTML);
+    });
+   });
+
+  $("#jokes").on("click", function() {
+    var url = $(this).attr("id");
+    $.get(url, function(response) {
     var resText;
-      if(typeof response === 'object'){
-        resText = response.setup + ': ' + response.punchline;
+      if (typeof response === "object") {
+        resText = "<p>" + response.setup + "</p><p><em>" + response.punchline + "</em></p>";
       } else {
         resText = response;
       }
-      $('#ajax-text').text(resText);
+      $("#ajax-text").html(resText);
     });
   });
 
+  $("#bandName").on("click", function() {
+    var url = $(this).attr("id");
+    var randomBandNameHTML;
+    $.get(url, function(response) {
+      randomBandNameHTML = "<p>" + response + "</p>";
+    $("#bandString").html(randomBandNameHTML);
+    });
+  });
+
+  $("#bandNameCustom").on("submit", function(e) {
+    e.preventDefault(); //don't refresh the page when clicked
+    var url = $(this).attr("id");
+    var animal = $("input[name=animal]").val();
+    var animalName = { animal: animal };
+    $.post(url, animalName, function(response) {
+      var bandNameCustomified = response;
+    $("#bandStringCustom").html(bandNameCustomified);
+    });
+  });
+
+  $("#piglatin").on("submit", function(e) {
+    e.preventDefault(); //don't refresh the whole page
+    var firstname = $("input[name=firstname]").val(); //get the value of what was in the input tag firstname and put it into the variable
+    var lastname = $("input[name=lastname]").val();
+    var name = { firstname: firstname, lastname: lastname }; //constructing an object, key firstname, value firstname, etc.
+    $.post("piglatin", name, function(response) { //send data to the server, piglatin is the route name (it'll be blahblah/piglatin. parameters are in the order of (route, data/variable, function)
+      var piglatinified = response.firstname + " " + response.lastname;
+    $("#piglatinified").text(piglatinified);
+    });
+  });
 });
