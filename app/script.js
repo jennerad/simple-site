@@ -46,15 +46,8 @@ $(document).ready(function() {
     var url = $(this).attr("id");
     var animal = $("input[name=animal]").val();
     var animalName = { animal: animal };
-    // console.log(animal + " was entered"); //works to here
-    // console.log(typeof(animal)); //string
-    // console.log(animalName);
-    // console.log(animalName.animal);
-
-    $.post(url, animalName.animal, function(response) {
-      var bandNameCustomified = response + " " + animal;
-      // var bandNameCustomified = response.animal ;
-      // console.log(bandNameCustomified);
+    $.post(url, animalName, function(response) {
+      var bandNameCustomified = response;
     $("#bandStringCustom").html(bandNameCustomified);
     });
   });
@@ -64,11 +57,8 @@ $(document).ready(function() {
     var firstname = $("input[name=firstname]").val(); //get the value of what was in the input tag firstname and put it into the variable
     var lastname = $("input[name=lastname]").val();
     var name = { firstname: firstname, lastname: lastname }; //constructing an object, key firstname, value firstname, etc.
-  // console.log(name.firstname);
-  // console.log(name.lastname);
     $.post("piglatin", name, function(response) { //send data to the server, piglatin is the route name (it'll be blahblah/piglatin. parameters are in the order of (route, data/variable, function)
       var piglatinified = response.firstname + " " + response.lastname;
-  // console.log(piglatinified);
     $("#piglatinified").text(piglatinified);
     });
   });

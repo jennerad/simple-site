@@ -45,8 +45,8 @@ app.get("/bandName", function(req, res) {
   });
 
 app.post("/bandNameCustom", function(req, res) {
+  animalPost = req.body.animal;
   var animaled = bandcustomify(req.body.animal);
-  // console.log("animaled in the app post is " + animaled); //returns undefined
   res.json(animaled);
   });
 
